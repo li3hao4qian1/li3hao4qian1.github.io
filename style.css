@@ -1,0 +1,39 @@
+body{
+	background-color:#1f1e33;
+}
+a{
+	color:#efef77;
+}
+p{
+	color:#efefef;
+}
+b{
+	color:#ffffff;
+}
+ul{
+    list-style-type: none;
+    margin-top: -50px;
+    padding: 0;
+    position: fixed; 
+    background-color: #101112;
+}
+li{
+    float:left;
+}
+li a {
+    display: block;
+    color: #efef77;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a:hover{
+    color: #1ae1fb;
+}
+legend{
+    color: #ffffff;
+}
+.footer {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 10px;
+}
