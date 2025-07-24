@@ -1,5 +1,6 @@
 body{
 	background-color:#1f1e33;
+	font-family: Lato, -apple-system, 'PingFang SC', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Microsoft Yahei', 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
 }
 a{
 	color:#efef77;
@@ -9,6 +10,11 @@ p{
 }
 b{
 	color:#ffffff;
+}
+@keyframes hue {
+    0% { filter: brightness(1.5); }
+   50% { filter: brightness(0.5); }
+  100% { filter: brightness(1.5); }
 }
 ul{
     list-style-type: none;
@@ -22,18 +28,49 @@ li{
 }
 li a {
     display: block;
+	border: 1px solid;
     color: #efef77;
     padding: 8px 16px;
     text-decoration: none;
 }
 li a:hover{
     color: #1ae1fb;
+	background: linear-gradient(120deg, #1f1e33,#1ae1fb);
+	animation: hue 2s ease-in-out infinite;
 }
 legend{
     color: #ffffff;
 }
 .footer {
-  background-color: #F1F1F1;
-  text-align: center;
-  padding: 10px;
+    background-color: #F1F1F1;
+    color: #000000;
+    text-align: center;
+    padding: 10px;
+}
+
+.list{
+	display: flex;
+}
+
+.lleft{
+	width: 70%;
+}
+
+.lright{
+	width: 30%;
+	margin-left: auto;
+}
+
+.button.go{
+	background: linear-gradient(0deg, #1f1e33,#1afb1e);
+    display: block;
+	border: 1px solid;
+    color: #77ef77;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.button.go:hover{
+    color: #60c060;
+	background: linear-gradient(180deg, #1f1e33,#1afb1e);
+	animation: hue 2s ease-in-out infinite;
 }
