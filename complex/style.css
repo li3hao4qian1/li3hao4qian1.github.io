@@ -1,6 +1,7 @@
 body{
 	background-color:#eeeeee;
 	font-family: Lato, -apple-system, 'PingFang SC', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Microsoft Yahei', 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+	line-height: 30px;
 }
 a{
 	color:#208e8e;
@@ -40,6 +41,14 @@ li a:hover{
     color: #e5e5e5;
 	background: linear-gradient(120deg, #eeeeee,#ff6000);
 	animation: hue 2s ease-in-out infinite;
+}
+th{
+	border: 1px solid;
+    background=#444444;
+}
+td{
+	border: 1px solid;
+    background=#bbbbbb;
 }
 legend{
     color: #000000;

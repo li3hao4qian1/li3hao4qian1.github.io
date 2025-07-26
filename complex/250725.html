@@ -11,7 +11,7 @@
 		<li><a href="/">lihaoqian's blog</a></li>
 		<li><a href="/complex/">杂项</a></li>
 		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
-		<li><a href="/"><b>/主页/杂项<b></a><li>
+		<li><a href="/"><b>/主页/杂项/Blog250725<b></a><li>
 	</ul>
 	<div class="list">
 		<div class="lleft">
@@ -28,6 +28,8 @@
 			</fieldset>
 			<fieldset>
 				<legend>用法</legend>
+				在C++程序中执行控制台命令。
+				<hr>
 				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-reservedword">char</span><span class="cpp0-symbol">[]);<br></span></div></fieldset>
 				char[]字符串代表要执行的命令。
 			</fieldset>
@@ -36,7 +38,7 @@
 				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-string">"cls"</span><span class="cpp0-symbol">);</span></div></fieldset>
 				<fieldset>
 					<legend>在cmd.exe中的解释</legend>
-					清除屏幕。
+					清除屏幕。<br>
 					CLS
 				</fieldset>
 				<del>简短</del>
@@ -44,12 +46,63 @@
 				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-string">"pause"</span><span class="cpp0-symbol">);</span></div></fieldset>
 				<fieldset>
 					<legend>在cmd.exe中的解释</legend>
-					暂停批处理程序，并显示以下消息:
+					暂停批处理程序，并显示以下消息:<br>
 					    请按任意键继续. . .
 				</fieldset>
-				--据说ConsolePauser.exe也是这么实现的?
 				<hr>
-				
+				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-string">"mode con cols=%d lines=%d"</span><span class="cpp0-symbol">);</span></div></fieldset>
+				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-string">"mode con rate=%d"</span><span class="cpp0-symbol">);</span></div></fieldset>
+				<fieldset>
+					<legend>在cmd.exe中的解释</legend>
+					配置系统设备。<br>
+					...<br>
+					显示模式:          MODE CON[:] [COLS=c] [LINES=n]<br>
+					击键率:            MODE CON[:] [RATE=r DELAY=d]<br>
+				</fieldset>
+				使用时，将%d替换为要设置的行数与列数或击键率。<br>
+				研究发现：
+				<table border="1">
+					<thead>
+						<tr>
+						    <th>击键率(rate)</th>
+						    <th>效果</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						    <td>0/1</td>
+						    <td>难受</td>
+						</tr>
+						<tr>
+						    <td>4</td>
+						    <td>大概就是你写程序的平均速度吧(取决于你会不会发呆)</td>
+						</tr>
+						<tr>
+						    <td>10</td>
+						    <td>接近手指连点速度</td>
+						</tr>
+						<tr>
+						    <td>31</td>
+						    <td>默认速度,也是最高</td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<fieldset><div style="font: 21pt Consolas;"><span class="cpp0-function">system</span><span class="cpp0-symbol">(</span><span class="cpp0-string">"title %s"</span><span class="cpp0-symbol">);</span></div></fieldset>
+				<fieldset>
+					<legend>在cmd.exe中的解释</legend>
+					设置命令提示窗口的窗口标题。<br>
+					TITLE [string]<br>
+					  string       指定命令提示窗口的标题。
+				</fieldset>
+				现在你的程序的标题将会是 Console ,而不是 管理员：C:\Users\Administrator\Desktop\未命名1.exe 。
+			</fieldset>
+			<fieldset>
+				<legend><b>注意事项</b></legend>
+				<b>在使用mode con rate指令时，并不是单单对C++程序起到作用！</b><br>
+				例如，在C++程序中降低击键率，Dev-C++也会降低。<br>
+				因此，在使用该指令时，必须调回31!<br>
+				<del>别问我怎么知道的</del>
 			</fieldset>
 		</div>
 		<div class="lright">
