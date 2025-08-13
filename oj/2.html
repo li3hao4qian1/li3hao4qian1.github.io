@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>A Lǐ-Hàoqiāntic Website</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<br><br><br>
+	<ul>
+		<li><a href="/">lihaoqian's blog</a></li>
+		<li><a href="/tools/">工具</a></li>
+		<li><a href="/oj/">Online Judge</a></li>
+		<li><a href="/complex/">杂项</a></li>
+		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
+		<li><a href="/"><b>/主页/Online Judge/P002</b></a><li>
+	</ul>
+	<div class="list">
+		<div class="lleft">
+			<fieldset>
+				<legend>题目</legend>
+				<h1>P002 -- Hello, World!</h1>
+			</fieldset>
+			<fieldset>
+				<legend>题目内容</legend>
+				<h2>题目描述</h2>
+				输出<code>Hello, World!</code>
+				<h2>输入输出样例</h2>
+				<b>输出#1</b><br>
+				<code>
+				Hello, World!
+				</code><br>
+			</fieldset>
+			<fieldset>
+				<legend>提交评测</legend>
+				<input type="radio" id="bf" checked> Brainf*ck Compiler with ASCII and 16 array size, range -128~127
+				<p class="result" id="result">
+					Wating for submit
+				</p>
+				<p class="result small" id="tc1">testcase 1: Wating for submit</p>
+				<textarea id="text">Copy here</textarea><br>
+				<button class="submit" onclick="javascript:run()">Submit</button>
+			</fieldset>
+			<script>
+			function compile(input,ans,elem){
+				let code=document.getElementById("text").value;
+				let res=document.getElementById(elem);
+				res.innerText="Running";
+				res.style="color:cyan;";
+				let mem=[];
+				for(let i=0;i<16;i++){
+					mem.push(0);
+				}
+				let pnt=0;
+				let output="";
+				let lop=[];
+				var cnt=0;
+				for(let opt of code){
+					if(opt=='['){cnt++;}
+					if(opt==']'){cnt--;}
+					if(cnt<0){
+						res.innerText="Compile Error: ']' without '['";
+						res.style="color:darkblue;";
+						return 0;
+					}
+				}
+				if(cnt>0){
+					res.innerText="Compile Error: Unclosed '['";
+					res.style="color:darkblue;";
+					return 0;
+				}
+				let step=0;
+				for(let i=0;i<code.length;i++){
+					var opt=code[i];
+					step++;
+					if(step>100000000){
+						res.innerText="Time Limit Exceeded: Should in 1e8 steps but used more";
+						res.style="color:orange;";
+						return 0;
+					}
+					if(opt=='<'){
+						pnt--;
+						if(pnt<0){
+							res.innerText="Runtime Error: Segmentation Error on the left";
+							res.style="color:purple;";
+							return 0;
+						}
+					}
+					if(opt=='>'){
+						pnt++;
+						if(pnt>15){
+							res.innerText="Runtime Error: Segmentation Error on the right";
+							res.style="color:purple;";
+							return 0;
+						}
+					}
+					if(opt=='+'){
+						mem[pnt]++;
+						if(mem[pnt]>127){
+							res.innerText="Runtime Error: Value out of range (greater than 127)";
+							res.style="color:purple;";
+							return;
+						}
+					}
+					if(opt=='-'){
+						mem[pnt]--;
+						if(mem[pnt]<-128){
+							res.innerText="Runtime Error: Value out of range (less than -128)";
+							res.style="color:purple;";
+							return 0;
+						}
+					}
+					if(opt==','){
+						if(input.length>0){
+							mem[pnt]=input[0].charCodeAt();
+							input=input.substr(1);
+						}
+					}
+					if(opt=='.'){
+						output+=(String.fromCharCode(mem[pnt]));
+					}
+					if(opt=='['){
+						lop.push(i);
+					}
+					if(opt==']'){
+						var port=lop.pop();
+						if(mem[pnt]!=0){
+							i=port;
+							lop.push(port);
+						}
+					}
+				}
+				output=output.trim();
+				if(output==ans){
+					res.innerText="Accepted";
+					res.style="color:forestgreen;";
+					return 100;
+				}else{
+					res.innerText="Wrong Answer:Expected ["+(ans==''?"nothing":ans)+"], read ["+(output==''?"nothing":output)+"]";
+					res.style="color:red;";
+					return 0;
+				}
+			}
+			function run(){
+				const inputs=[0,"noinput"];
+				const anss=[0,"Hello, world!"];
+				let point=0;
+				for(let i=1;i<=1;i++){
+					point+=compile(inputs[i],anss[i],"tc"+i.toString())/1;
+					var a=document.getElementById("tc"+i.toString());
+					a.innerText="testcase "+i.toString()+": "+a.innerText;
+				}
+				let res=document.getElementById("result");
+				res.innerText=(point<100?"Unaccepted ":"Accepted ")+point.toString();
+				res.style="color:"+(point<100?"red":"forestgreen")+";";
+			}
+			</script>
+		</div>
+		<div class="lright">
+			<fieldset>
+				<legend>铀氢链接</legend>
+				<a href="http://sdfzoj.top/">SDFZOJ</a><br>
+				<a href="http://cooode.top/">Code+</a><br>
+				<a href="https://www.luogu.com.cn/">锣鼓</a><br>
+				<a href="http://loj.ac/">镭锛er殴zhēi</a><br>
+				<hr>
+				<a href="http://oi-wiki.org/">殴挨喂鸡</a><br>
+				<a href="http://oier.baoshuo.dev/">殴挨咦饵滴鼻</a><br>
+				<a href="http://oeis.org/">殴饿咦嘶</a><br>
+				<hr>
+				<a href="about:blank">违反范文反问我如果是苏菲货物从外表皮肤</a><br>
+			</fieldset>
+		</div>
+	</div>
+	<div class="footer">
+	本页面由 吉特哈布·裴杰斯 提供。
+	</div>
+</body>
+</html>
