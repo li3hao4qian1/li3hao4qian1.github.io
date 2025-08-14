@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>A Lǐ-Hàoqiāntic Website</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<br><br><br>
+	<ul>
+		<li><a href="/">lihaoqian's blog</a></li>
+		<li><a href="/tools/">工具</a></li>
+		<li><a href="/oj/">Online Judge</a></li>
+		<li><a href="/complex/">杂项</a></li>
+		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
+		<li><a href="/"><b>/主页/工具</b></a><li>
+	</ul>
+	<div class="three">
+		<div class="tleft">
+			<fieldset>
+				<legend>ASCII转字符</legend>
+				<textarea id="ascchar" class="oneline">65</textarea>
+				<button onclick="javascript:Ascchar();">转</button>
+				<b id="ASCCHAR"></b>
+				<script>
+				function Ascchar(){
+					let x=document.getElementById("ascchar").value;
+					let y=document.getElementById("ASCCHAR");
+					try{
+						y.innerText=String.fromCharCode(x);
+					}catch(err){
+						y.innerText="Failed";
+					}
+				}
+				</script>
+			</fieldset>
+			<fieldset>
+				<legend>字符转ASCII</legend>
+				<textarea id="charasc" class="oneline">A</textarea>
+				<button onclick="javascript:Charasc();">转</button>
+				<b id="CHARASC"></b>
+				<script>
+				function Charasc(){
+					let x=document.getElementById("charasc").value;
+					let y=document.getElementById("CHARASC");
+					try{
+						y.innerText=x.charCodeAt();
+					}catch(err){
+						y.innerText="Failed";
+					}
+				}
+				</script>
+			</fieldset>
+		</div>
+		<div class="tmiddle">
+			<fieldset>
+				<legend>!</legend>
+			</fieldset>
+		</div>
+		<div class="tright">
+			<fieldset>
+				<legend>铀氢链接</legend>
+				<a href="http://sdfzoj.top/">SDFZOJ</a><br>
+				<a href="http://cooode.top/">Code+</a><br>
+				<a href="https://www.luogu.com.cn/">锣鼓</a><br>
+				<a href="http://loj.ac/">镭锛er殴zhēi</a><br>
+				<a href="https://atcoder.jp/">阿特扣的</a><br>
+				<a href="https://codeforces.com/">扣的佛谁死</a><br>
+				<hr>
+				<a href="http://oi-wiki.org/">殴挨喂鸡</a><br>
+				<a href="https://cppreference.com/">铯钾钾残烤</a><br>
+				<a href="http://oier.baoshuo.dev/">殴挨咦饵滴鼻</a><br>
+				<a href="http://oeis.org/">殴饿咦嘶</a><br>
+				<hr>
+				<a href="https://latexlive.com/">镧锝硫活着</a><br>
+				<a href="https://ptable.com/">猿夙轴鳍镖</a><br>
+				<hr>
+				<a href="about:blank">违反范文反问我如果是苏菲货物从外表皮肤</a><br>
+			</fieldset>
+		</div>
+	</div>
+	<div class="footer">
+	本页面由 吉特哈布·裴杰斯 提供。
+	</div>
+</body>
+</html>

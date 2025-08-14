@@ -13,27 +13,27 @@
 		<li><a href="/oj/">Online Judge</a></li>
 		<li><a href="/complex/">杂项</a></li>
 		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
-		<li><a href="/"><b>/主页/Online Judge/P001</b></a><li>
+		<li><a href="/"><b>/主页/Online Judge/P000</b></a><li>
 	</ul>
 	<div class="list">
 		<div class="lleft">
 			<fieldset>
 				<legend>题目</legend>
-				<h1>P001 -- [SPOJ] TEST - Life, the Universe, and Everything (Easy)</h1>
-				难度:<span style="color:yellow;">人机/门口-</span><br>
+				<h1>P000 -- 复读机</h1>
+				难度:<span style="color:red;">非碳基生物</span><br>
 			</fieldset>
 			<fieldset>
 				<legend>题目内容</legend>
 				<h2>题目描述</h2>
-				您的程序应该使用暴力破解方法来找到生命、宇宙和一切的答案。更精确地说……将输入的字符重写到输出中。在读取到字符6后停止处理输入。
+				输入一个字符，将其输出。
 				<h2>输入输出样例</h2>
 				<b>输入#1</b><br>
 				<code>
-				123456789
+				C
 				</code><br>
 				<b>输出#1</b><br>
 				<code>
-				12345
+				C
 				</code><br>
 			</fieldset>
 			<fieldset>
@@ -156,8 +156,8 @@
 				}
 			}
 			function run(){
-				const inputs=[0,"123456789","abcd6ccc","ijgpwqeifb6","1111116","IAK6IOI","6","312936","587556788","91781363333","yyyy6yyyy6eee"];
-				const anss=[0,"12345","abcd","ijgpwqeifb","111111","IAK","","31293","58755","917813","yyyy"];
+				const inputs=[0,"A","c","6","1","K"," ","44","X","!","@"];
+				const anss=[0,"A","c","6","1","K","","4","X","!","@"];
 				let point=0;
 				for(let i=1;i<=10;i++){
 					point+=compile(inputs[i],anss[i],"tc"+i.toString())/10;
