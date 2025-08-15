@@ -2,6 +2,7 @@ body{
 	background-color:#1f1e33;
 	font-family: Lato, -apple-system, 'PingFang SC', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Microsoft Yahei', 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
 	line-height: 30px;
+	color:#fff;
 }
 a{
 	color:#efef77;
@@ -14,6 +15,31 @@ b{
 }
 .oneline{
 	height: 17px;
+}
+.number{
+	width: 100px;
+	height: 60px;
+	font-size: 50px;
+	font-family: "Cambria math";
+}
+.modulo{
+	width: 100px;
+	height: 20px;
+	font-size: 16px;
+	font-family: "Cambria math";
+	margin-bottom: 3%;
+}
+.big{
+	font-family:"Cambria math";
+	font-size:72px;
+}
+.equal{
+	width: 77px;
+	height: 62px;
+	font-family: "Cambria math";
+	transform: translate(-11%,-28%);
+	margin-left: 27px;
+	font-size: 32px;
 }
 @keyframes hue {
     0% { filter: brightness(1.5); }

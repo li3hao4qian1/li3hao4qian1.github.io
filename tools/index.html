@@ -54,7 +54,29 @@
 		</div>
 		<div class="tmiddle">
 			<fieldset>
-				<legend>!</legend>
+				<legend>阶乘</legend>
+				<textarea id="fact1" class="number">3</textarea>
+				<span class="big">! mod</span>
+				<textarea id="fact2" class="modulo">1000000007</textarea>
+				<button onclick="javascript:Fact();" class="equal">=</button>
+				<b id="FACT" class="equal" style="border: white 2px solid;">Answer</b>
+				<script>
+				function Fact(){
+					let x=document.getElementById("fact1").value;
+					let y=document.getElementById("fact2").value;
+					let z=document.getElementById("FACT");
+					try{
+						let ans=1;
+						for(var i=1;i<=x;i++){
+							ans*=i;
+							ans%=y;
+						}
+						z.innerText=ans%y;
+					}catch(err){
+						z.innerText="Failed";
+					}
+				}
+				</script>
 			</fieldset>
 		</div>
 		<div class="tright">
