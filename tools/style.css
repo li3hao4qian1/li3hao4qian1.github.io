@@ -33,6 +33,18 @@ b{
 	font-family:"Cambria math";
 	font-size:72px;
 }
+.small{
+	font-family:"Cambria math";
+	font-size:16px;
+	height: 17px;
+	width: 30px;
+}
+.up{
+	transform: translate(-17%,-146%);
+}
+.down{
+	transform: translate(-127%,30%);
+}
 .equal{
 	width: 77px;
 	height: 62px;

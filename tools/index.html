@@ -51,6 +51,43 @@
 				}
 				</script>
 			</fieldset>
+			<fieldset>
+				<legend>复读</legend>
+				<textarea id="repeat1" class="oneline">XXSXF!</textarea>
+				×
+				<textarea id="repeat2" class="oneline">2</textarea>
+				<button onclick="javascript:Repeat();">腐殖质剪贴板</button>
+				<script>
+				function Repeat(){
+					let x=document.getElementById("repeat1").value;
+					let y=document.getElementById("repeat2").value;
+					try{
+						let b=Number.parseInt(y);
+						let a="";
+						for(var i=1;i<=b;i++){
+							a+=x;
+						}
+						navigator.clipboard
+						    .writeText(a)
+						    .then(() => {
+						      console.log("Text copied to clipboard");
+						    })
+						    .catch((error) => {
+						      console.error("Failed to copy text: ", error);
+						    });
+					}catch(err){
+						navigator.clipboard
+						    .writeText("Failed")
+						    .then(() => {
+						      console.log("Failed");
+						    })
+						    .catch((error) => {
+						      console.error("Failed to copy 'Failed': ", error);
+						    });
+					}
+				}
+				</script>
+			</fieldset>
 		</div>
 		<div class="tmiddle">
 			<fieldset>
@@ -71,6 +108,63 @@
 							ans*=i;
 							ans%=y;
 						}
+						z.innerText=ans%y;
+					}catch(err){
+						z.innerText="Failed";
+					}
+				}
+				</script>
+			</fieldset>
+			<fieldset>
+				<legend>排列</legend>
+				<span class="big">A</span>
+				<textarea id="pl1" class="small up">2</textarea>
+				<textarea id="pl2" class="small down">3</textarea>
+				<span class="big"> mod</span>
+				<textarea id="pl3" class="modulo">1000000007</textarea>
+				<button onclick="javascript:Pl();" class="equal">=</button>
+				<b id="PL" class="equal" style="border: white 2px solid;">Answer</b>
+				<script>
+				function Pl(){
+					let m=document.getElementById("pl1").value;
+					let n=document.getElementById("pl2").value;
+					let y=document.getElementById("pl3").value;
+					let z=document.getElementById("PL");
+					try{
+						let ans=1;
+						for(var i=n-m+1;i<=n;i++){
+							ans*=i;
+							ans%=y;
+						}
+						z.innerText=ans%y;
+					}catch(err){
+						z.innerText="Failed";
+					}
+				}
+				</script>
+			</fieldset>
+			<fieldset>
+				<legend>组合</legend>
+				<span class="Big">C</span>
+				<textarea id="zh1" class="small up">2</textarea>
+				<textarea id="zh2" class="small down">3</textarea>
+				<span class="big"> mod</span>
+				<textarea id="zh3" class="modulo">1000000007</textarea>
+				<button onclick="javascript:Zh();" class="equal">=</button>
+				<b id="ZH" class="equal" style="border: white 2px solid;">Answer</b>
+				<script>
+				function Pl(){
+					let m=document.getElementById("zh1").value;
+					let n=document.getElementById("zh2").value;
+					let y=document.getElementById("zh3").value;
+					let z=document.getElementById("ZH");
+					try{
+						let ans=1;
+						for(var i=n-m+1;i<=n;i++){
+							ans*=i;
+							ans%=y;
+						}
+						
 						z.innerText=ans%y;
 					}catch(err){
 						z.innerText="Failed";
