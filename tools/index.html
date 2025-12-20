@@ -13,7 +13,7 @@
 		<li><a href="/oj/">Online Judge</a></li>
 		<li><a href="/complex/">杂项</a></li>
 		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
-		<li><a href="/"><b>/主页/工具</b></a><li>
+		<li><a href="/"><b>/主页/工具</b></a></li>
 	</ul>
 	<div class="three">
 		<div class="tleft">
@@ -88,6 +88,110 @@
 				}
 				</script>
 			</fieldset>
+			<fieldset>
+				<legend>调色(SetConsoleTextAttribute())</legend>
+				<br><span id="sctaa" class="big" style="color: #000;background-color: #000;">A</span>
+				<b id="sctab">0</b><hr>
+				<button onclick="javascript:rs(4);">字红</button>
+				<button onclick="javascript:rs(2);">字绿</button>
+				<button onclick="javascript:rs(1);">字蓝</button>
+				<button onclick="javascript:rs(8);">字亮度</button>
+				<br>
+				<button onclick="javascript:rs(64);">底红</button>
+				<button onclick="javascript:rs(32);">底绿</button>
+				<button onclick="javascript:rs(16);">底蓝</button>
+				<button onclick="javascript:rs(128);">底亮度</button>
+				<br>
+				<button onclick="javascript:rs(0x400);">上划线</button>
+				<button onclick="javascript:rs(0x800);">左划线</button>
+				<button onclick="javascript:rs(0x1000);">右划线</button>
+				<button onclick="javascript:rs(0x8000);">下划线</button>
+				<br>
+				<button onclick="javascript:rs(0x4000);">反转字体、背景颜色</button>
+				<button onclick="javascript:rs(917813);">湮灭</button>
+				<br>
+				<textarea id="sctac" class="oneline">15</textarea>
+				<button onclick="javascript:rs(789113);">预览</button>
+				<script>
+				let clr=0;
+				function rs(n){
+					let x=document.getElementById("sctaa");
+					let y=document.getElementById("sctab");
+					clr=clr^n;
+					var front=clr&0x0F;
+					var back=clr&0xF0;
+					back=back>>4;
+					var frontcolor='';
+					var backcolor='';
+					var addon='';
+					switch(front){
+						case  0:frontcolor='#000000';break;
+						case  1:frontcolor='#0037DA';break;
+						case  2:frontcolor='#13A10E';break;
+						case  3:frontcolor='#3A96DD';break;
+						case  4:frontcolor='#C50F1F';break;
+						case  5:frontcolor='#881798';break;
+						case  6:frontcolor='#C19C00';break;
+						case  7:frontcolor='#767676';break;
+						case  8:frontcolor='#CCCCCC';break;
+						case  9:frontcolor='#3B78FF';break;
+						case 10:frontcolor='#16C60C';break;
+						case 11:frontcolor='#61D6D6';break;
+						case 12:frontcolor='#E74856';break;
+						case 13:frontcolor='#B4009E';break;
+						case 14:frontcolor='#F9F1A5';break;
+						case 15:frontcolor='#F2F2F2';break;
+					}
+					switch(back){
+						case  0:backcolor='#000000';break;
+						case  1:backcolor='#0037DA';break;
+						case  2:backcolor='#13A10E';break;
+						case  3:backcolor='#3A96DD';break;
+						case  4:backcolor='#C50F1F';break;
+						case  5:backcolor='#881798';break;
+						case  6:backcolor='#C19C00';break;
+						case  7:backcolor='#767676';break;
+						case  8:backcolor='#CCCCCC';break;
+						case  9:backcolor='#3B78FF';break;
+						case 10:backcolor='#16C60C';break;
+						case 11:backcolor='#61D6D6';break;
+						case 12:backcolor='#E74856';break;
+						case 13:backcolor='#B4009E';break;
+						case 14:backcolor='#F9F1A5';break;
+						case 15:backcolor='#F2F2F2';break;
+					}
+					if(clr&0x4000){
+						var temp=frontcolor;
+						frontcolor=backcolor;
+						backcolor=temp;
+					}
+					if(clr&0x400){
+						addon+='border-top: 2px solid '+frontcolor+';';
+					}
+					if(clr&0x800){
+						addon+='border-left: 2px solid '+frontcolor+';';
+					}
+					if(clr&0x1000){
+						addon+='border-right: 2px solid '+frontcolor+';';
+					}
+					if(clr&0x8000){
+						addon+='border-bottom: 2px solid '+frontcolor+';';
+					}
+					if(n==917813){
+						addon='';
+						frontcolor='#000';
+						backcolor='#000';
+						clr=0;
+					}
+					x.style='color:'+frontcolor+';background-color:'+backcolor+';'+addon;
+					y.innerText=clr;
+					if(n==789113){
+						clr=Number.parseInt(document.getElementById("sctac").value);
+						rs(0);
+					}
+				}
+				</script>
+			</fieldset>
 		</div>
 		<div class="tmiddle">
 			<fieldset>
@@ -145,7 +249,7 @@
 			</fieldset>
 			<fieldset>
 				<legend>组合</legend>
-				<span class="Big">C</span>
+				<span class="big">C</span>
 				<textarea id="zh1" class="small up">2</textarea>
 				<textarea id="zh2" class="small down">3</textarea>
 				<span class="big"> mod</span>
@@ -153,18 +257,17 @@
 				<button onclick="javascript:Zh();" class="equal">=</button>
 				<b id="ZH" class="equal" style="border: white 2px solid;">Answer</b>
 				<script>
-				function Pl(){
+				function Zh(){
 					let m=document.getElementById("zh1").value;
 					let n=document.getElementById("zh2").value;
 					let y=document.getElementById("zh3").value;
 					let z=document.getElementById("ZH");
 					try{
 						let ans=1;
-						for(var i=n-m+1;i<=n;i++){
-							ans*=i;
-							ans%=y;
+						k = Math.min(m, n - m);
+						for (let i = 1; i <= m; i++) {
+							ans = ans * (n - m + i) / i;
 						}
-						
 						z.innerText=ans%y;
 					}catch(err){
 						z.innerText="Failed";
@@ -190,6 +293,7 @@
 				<hr>
 				<a href="https://latexlive.com/">镧锝硫活着</a><br>
 				<a href="https://ptable.com/">猿夙轴鳍镖</a><br>
+				<a href="https://time.is/">All roads lead to Rome.</a><br>
 				<hr>
 				<a href="about:blank">违反范文反问我如果是苏菲货物从外表皮肤</a><br>
 			</fieldset>
