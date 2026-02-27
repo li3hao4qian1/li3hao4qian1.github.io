@@ -85,25 +85,25 @@ legend{
 	animation: hue 2s ease-in-out infinite;
 }
 
-.cpp0-character { color: #000000; }
-.cpp0-class { color: #008080; }
-.cpp0-comment { color: #8c8c8c; font-style: italic; }
-.cpp0-escapesequences { color: #ff0000; }
-.cpp0-float { color: #800080; }
-.cpp0-function { color: #00627a; }
-.cpp0-globalvariable { color: #660e7a; }
-.cpp0-hexadecimal { color: #800080; }
-.cpp0-identifier { color: #080808; }
-.cpp0-illegalchar { color: #ff0000; }
-.cpp0-localvariable { color: #000000; }
-.cpp0-number { color: #1750eb; }
-.cpp0-octal { color: #800080; }
-.cpp0-preprocessor { color: #1f542e; }
-.cpp0-reservedword { color: #0033b3; font-weight: bold; }
-.cpp0-space { color: #bababa; }
-.cpp0-string { color: #007d17; font-weight: bold; }
-.cpp0-symbol { color: #c10000; font-weight: bold; }
-.cpp0-variable { color: #400080; }
+.cpp0-character { color: #d69d85; }
+.cpp0-class { color: #4ec9b0; }
+.cpp0-comment { color: #6a9955; }
+.cpp0-escapesequences { color: #b5cea8; }
+.cpp0-float { color: #b5cea8; }
+.cpp0-function { color: #bfbfff; }
+.cpp0-globalvariable { color: #e2c8b8; }
+.cpp0-hexadecimal { color: #b5cea8; }
+.cpp0-identifier { color: #dcdcaa; }
+.cpp0-illegalchar { color: #ff3c3c; }
+.cpp0-localvariable { color: #9cdcfe; }
+.cpp0-number { color: #b5cea8; }
+.cpp0-octal { color: #b5cea8; }
+.cpp0-preprocessor { color: #c586c0; }
+.cpp0-reservedword { color: #569cd6; }
+.cpp0-space { color: #505050; }
+.cpp0-string { color: #d69d85; }
+.cpp0-symbol { color: #d4d4d4; }
+.cpp0-variable { color: #9cdcfe; }
 
 .light { color: #e7e7e7; background-color: #e1e1e1; }
 .light.legend {color:#000}
