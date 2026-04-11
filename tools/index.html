@@ -89,6 +89,69 @@
 				</script>
 			</fieldset>
 			<fieldset>
+				<legend>扎扎化(渣，渣、帅。吴，迪！)</legend>
+				<textarea id="zhazha" class="oneline">不成功，变成人</textarea><br>
+				<input id="zhazha2" type="range" min="0" max="1" value="0" step="0.01" onchange="javascript:testifzhazha();"><br>
+				<b id="ZHAZHA">拖动滑块来调节渣渣指数</b><br>
+				<button onclick="javascript:Zhazha();">渣渣!!!</button>
+				<script>
+				function testifzhazha(){
+					let x=document.getElementById("zhazha2").value;
+					// console.log("is it working? "+x);//Yah it works
+					if(x==1){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：渣渣如潮";
+					}else if(x>0.8){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：非常渣渣";
+					}else if(x>0.6){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：有些渣渣";
+					}else if(x>0.4){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：不太渣渣";
+					}else if(x>0.2){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：还有点渣渣";
+					}else if(x>0){
+						document.getElementById("ZHAZHA").innerText="渣渣指数：并不渣渣";
+					}else{
+						document.getElementById("ZHAZHA").innerText="渣渣指数：即刻轮回";
+					}
+				}
+				function Zhazha(){
+					let x=document.getElementById("zhazha").value;
+					let y=document.getElementById("zhazha2").value;
+					for(var i=0;i<x.length;i++){
+						var z=Math.random();
+						if(z<y){
+							var w="";
+							z=Math.random();
+							if(z>=0.9){
+								w="？";
+							}else if(z>=0.8){
+								w="！";
+							}else if(z>=0.7){
+								w="，";
+							}else if(z>=0.6){
+								w="。";
+							}else if(z>=0.5){
+								w="、";
+							}else if(z>=0.4){
+								w="！";
+							}else if(z>=0.3){
+								w="？";
+							}else if(z>=0.2){
+								w="。";
+							}else if(z>=0.1){
+								w="……";
+							}else{
+								w="、";
+							}
+							x=x.slice(0,i-1)+w+x.slice(i-1);
+							i++;
+						}
+					}
+					document.getElementById("zhazha").value=x;
+				}
+				</script>
+			</fieldset>
+			<fieldset>
 				<legend>调色(SetConsoleTextAttribute())</legend>
 				<br><span id="sctaa" class="big" style="color: #000;background-color: #000;">A</span>
 				<b id="sctab">0</b><hr>
