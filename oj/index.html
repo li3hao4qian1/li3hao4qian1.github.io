@@ -13,30 +13,12 @@
 		<li><a href="/oj/">Online Judge</a></li>
 		<li><a href="/complex/">杂项</a></li>
 		<li><a href="mailto:lihaoqian12@outlook.com">联系</a></li>
-		<li><a href="/"><b>/主页/Online Judge</b></a></li>
+		<li><a href="/"><b id="crumb">/主页/Online Judge</b></a></li>
 	</ul>
 	<div class="list">
-		<div class="lleft">
-			<fieldset>
-				<legend>P000 -- 复读机</legend>
-				难度:<span style="color:red;">非碳基生物</span><br>
-				<a href="/oj/0.html" class="button go">瞅一眼-></a>
-			</fieldset>
-			<fieldset>
-				<legend>P001 -- [SPOJ] TEST - Life, the Universe, and Everything (Easy)</legend>
-				难度:<span style="color:yellow;">人机/门口-</span><br>
-				<a href="/oj/1.html" class="button go">瞅一眼-></a>
-			</fieldset>
-			<fieldset>
-				<legend>P002 -- Hello, World!</legend>
-				难度:<span style="color:cyan;">门口+/入门-</span><br>
-				<a href="/oj/2.html" class="button go">瞅一眼-></a>
-			</fieldset>
-			<fieldset>
-				<legend>P003 -- A+B Problem (Easy)</legend>
-				难度:<span style="color:orange;">人机-</span><br>
-				<a href="/oj/3.html" class="button go">瞅一眼-></a>
-			</fieldset>
+		<div class="lleft" id="problems">
+		</div>
+		<div class="lleft" id="problem" hidden>
 		</div>
 		<div class="lright">
 			<fieldset>
@@ -67,7 +49,20 @@
 		</div>
 	</div>
 	<div class="footer">
-	本页面由 吉特哈布·裴杰斯 提供。
+		本页面由 吉特哈布·裴杰斯 提供。
 	</div>
+	<!-- 题目列表由 data/problems/*.js 登记，题面与测试点也在那里；
+	     编译器在 js/bf-compiler.js 与 js/cow-compiler.js，内存规格在 js/machine.js -->
+	<script src="js/oj.js"></script>
+	<script src="data/problems/p000.js"></script>
+	<script src="data/problems/p001.js"></script>
+	<script src="data/problems/p002.js"></script>
+	<script src="data/problems/p003.js"></script>
+	<script src="js/machine.js"></script>
+	<script src="js/bf-compiler.js"></script>
+	<script src="js/cow-compiler.js"></script>
+	<script src="js/judge.js"></script>
+	<script src="js/problem-view.js"></script>
+	<script src="js/app.js"></script>
 </body>
 </html>
