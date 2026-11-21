@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chess2B2T · 国际象棋与 Half Chess 工具箱</title>
+<meta name="description" content="轻量、离线的棋类工具：标准国际象棋与 Half Chess（4×8）走子，导入导出 PGN，查看编辑 FEN，逐步复盘棋谱。">
+<meta name="theme-color" content="#0e1014">
+<link rel="icon" href="img/wk.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"><img src="img/wk.png" alt=""></span>
+      <span class="brand-text">
+        <strong>Chess<em>2B2T</em></strong>
+        <small>国际象棋 · Half Chess</small>
+      </span>
+    </div>
+
+    <div class="topbar-actions">
+      <span class="badge" id="engineBadge">离线 · 8×8</span>
+      <button class="icon-btn" id="btnTheme" type="button" title="切换浅色 / 深色" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.9 1.9M16.9 16.9l1.9 1.9M18.8 5.2l-1.9 1.9M7.1 16.9L5.2 18.8"/></svg>
+      </button>
+      <button class="btn btn-primary" id="btnJumpImport" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
+        导入棋谱
+      </button>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- 棋盘区 -->
+    <section class="board-col" id="boardCol" data-variant="standard">
+
+      <div class="seat" id="seatTop">
+        <span class="turn-dot" id="dotTop"></span>
+        <span class="seat-name" id="nameTop">黑方</span>
+        <span class="seat-sub" id="subTop"></span>
+      </div>
+
+      <div class="board-shell">
+        <div class="board-frame">
+          <div class="rank-labels" id="rankLabels"></div>
+          <div class="board" id="board"></div>
+          <div class="file-labels" id="fileLabels"></div>
+        </div>
+
+        <div class="promo" id="promo" hidden>
+          <div class="promo-box">
+            <div class="promo-title">升变</div>
+            <div class="promo-options" id="promoOptions"></div>
+            <button class="promo-cancel" id="promoCancel" type="button">取消</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="seat seat-white" id="seatBottom">
+        <span class="turn-dot" id="dotBottom"></span>
+        <span class="seat-name" id="nameBottom">白方</span>
+        <span class="seat-sub" id="subBottom"></span>
+      </div>
+
+      <div class="controls">
+        <div class="nav-group">
+          <button class="icon-btn" data-nav="first" type="button" title="开局 (Home)" aria-label="开局">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 6.5 10 12l8 5.5"/></svg>
+          </button>
+          <button class="icon-btn" data-nav="prev" type="button" title="上一步 (←)" aria-label="上一步">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 5.5 8 12l8.5 6.5"/></svg>
+          </button>
+          <button class="icon-btn play" data-nav="play" type="button" id="btnPlay" title="自动播放 (空格)" aria-label="自动播放">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-play"><path d="M8 5.5 18.5 12 8 18.5z" class="fill"/></svg>
+          </button>
+          <button class="icon-btn" data-nav="next" type="button" title="下一步 (→)" aria-label="下一步">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5 16 12l-8.5 6.5"/></svg>
+          </button>
+          <button class="icon-btn" data-nav="last" type="button" title="末步 (End)" aria-label="末步">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 6.5 14 12l-8 5.5"/></svg>
+          </button>
+        </div>
+
+        <div class="controls-right">
+          <label class="speed" title="播放速度">
+            <select id="speed" aria-label="播放速度">
+              <option value="2000">0.5×</option>
+              <option value="1200" selected>1×</option>
+              <option value="700">2×</option>
+            </select>
+          </label>
+          <button class="icon-btn" id="btnFlip" type="button" title="翻转棋盘" aria-label="翻转棋盘">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h11l-3-3M20 16H9l3 3"/><path d="M15 4.5V9M9 15v4.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="status" id="status">
+        <span class="status-main" id="statusMain">标准开局</span>
+        <span class="status-sub" id="statusSub"></span>
+      </div>
+    </section>
+
+    <!-- 侧栏 -->
+    <aside class="panel">
+      <nav class="tabs" role="tablist">
+        <button class="tab is-active" data-tab="moves" role="tab" type="button">棋谱</button>
+        <button class="tab" data-tab="variant" role="tab" type="button">变种</button>
+        <button class="tab" data-tab="import" role="tab" type="button">导入</button>
+        <button class="tab" data-tab="export" role="tab" type="button">导出</button>
+        <button class="tab" data-tab="fen" role="tab" type="button">FEN</button>
+      </nav>
+
+      <div class="tab-body">
+
+        <!-- 棋谱 -->
+        <section class="tab-panel is-active" data-panel="moves">
+          <div class="block">
+            <div class="block-head">
+              <h2>对局信息</h2>
+              <div class="head-actions">
+                <span class="mode-tag" id="modeTagMoves">8×8</span>
+                <button class="mini-btn" id="btnResetGame" type="button">新对局</button>
+              </div>
+            </div>
+            <div class="fields">
+              <label class="field"><span>白方</span><input id="fWhite" type="text" autocomplete="off" placeholder="White"></label>
+              <label class="field"><span>黑方</span><input id="fBlack" type="text" autocomplete="off" placeholder="Black"></label>
+              <label class="field"><span>赛事</span><input id="fEvent" type="text" autocomplete="off" placeholder="Event"></label>
+              <label class="field"><span>日期</span><input id="fDate" type="text" autocomplete="off" placeholder="YYYY.MM.DD"></label>
+              <label class="field"><span>结果</span>
+                <select id="fResult">
+                  <option value="*">未结束 *</option>
+                  <option value="1-0">白胜 1-0</option>
+                  <option value="0-1">黑胜 0-1</option>
+                  <option value="1/2-1/2">和棋 ½-½</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="block block-moves">
+            <div class="block-head">
+              <h2>着法</h2>
+              <span class="muted" id="moveCount">0 着</span>
+            </div>
+            <div class="moves" id="movesList">
+              <p class="empty">棋盘上走子，或从「导入」粘贴 PGN。</p>
+            </div>
+            <div class="move-comment" id="moveComment" hidden></div>
+          </div>
+        </section>
+
+        <!-- 变种 -->
+        <section class="tab-panel" data-panel="variant">
+          <div class="block">
+            <div class="block-head">
+              <h2>规则模式</h2>
+              <span class="mode-tag" id="modeTag">8×8</span>
+            </div>
+            <div class="seg" id="variantSwitch" role="group" aria-label="规则模式">
+              <button class="seg-btn is-active" data-variant="standard" type="button">标准 8×8</button>
+              <button class="seg-btn" data-variant="half" type="button">Half Chess 4×8</button>
+            </div>
+            <p class="hint">切换模式会开始一局新棋；导入含 FEN 的棋谱时，会按棋盘宽度自动识别模式。</p>
+          </div>
+
+          <div class="block">
+            <div class="block-head">
+              <h2>初始底线</h2>
+              <button class="mini-btn" id="btnRandomLayout" type="button">随机</button>
+            </div>
+            <p class="hint">王必须在 b 或 c 列，黑方按同列镜像。选一个布局，再按下方按钮开局。</p>
+            <div class="layout-list" id="layoutList"></div>
+            <button class="btn btn-primary btn-wide" id="btnApplyLayout" type="button">按此局面开局</button>
+          </div>
+
+          <div class="block">
+            <div class="block-head"><h2>Half Chess 规则</h2></div>
+            <ul class="rule-list">
+              <li><b>棋盘</b> 4 列 × 8 行（a–d，1–8），右下角 d1 为白格。</li>
+              <li><b>棋子</b> 每方一车、一象、一马、一王，没有后；兵位于第 2 / 7 行。</li>
+              <li><b>走法</b> 与国际象棋相同：兵可双步、斜吃、吃过路兵，并在第 8 / 1 行升变。</li>
+              <li><b>易位</b> 王到 a 列记 <code>O-O-O</code>，到 d 列记 <code>O-O</code>，车移到 b 或 c 列；王车未动、中间无子、路径不受攻击等前提同国际象棋。</li>
+              <li><b>升变</b> 只能升为初始局面中除王、兵外存在的棋子，通常为车、象、马。</li>
+              <li><b>记录</b> 初始局面写入 PGN 的 <code>FEN</code> 标签，并标记 <code>[Variant "Half Chess"]</code>。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 导入 -->
+        <section class="tab-panel" data-panel="import">
+          <div class="dropzone" id="dropzone">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 16v3.5h14V16"/></svg>
+            <p>拖入 <b>.pgn</b> 文件，或 <button class="link" id="btnChooseFile" type="button">选择文件</button></p>
+            <small>单局 / 多局 PGN、纯 FEN 局面均可</small>
+            <input type="file" id="fileInput" accept=".pgn,.txt,text/plain" multiple hidden>
+          </div>
+
+          <textarea class="code-area" id="importArea" rows="8" spellcheck="false"
+            placeholder="在此粘贴 PGN 或 FEN，例如：&#10;&#10;[Event &quot;对局&quot;]&#10;[White &quot;白方&quot;]&#10;[Black &quot;黑方&quot;]&#10;&#10;1. e4 e5 2. Nf3 Nc6 1/2-1/2&#10;&#10;或：&#10;rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"></textarea>
+
+          <div class="row row-wrap">
+            <button class="btn btn-primary" id="btnDoImport" type="button">导入</button>
+            <button class="btn" id="btnLoadSample" type="button">载入示例</button>
+            <button class="btn btn-quiet" id="btnClearImport" type="button">清空</button>
+          </div>
+
+          <div class="notice" id="importFeedback" hidden></div>
+          <div class="game-list" id="gameList" hidden></div>
+        </section>
+
+        <!-- 导出 -->
+        <section class="tab-panel" data-panel="export">
+          <div class="block-head">
+            <h2>PGN</h2>
+            <div class="head-actions">
+              <button class="mini-btn" id="btnCopyPgn" type="button">复制</button>
+              <button class="mini-btn" id="btnDownloadPgn" type="button">下载</button>
+            </div>
+          </div>
+          <textarea class="code-area pgn-area" id="pgnOut" rows="13" readonly spellcheck="false"></textarea>
+
+          <label class="field"><span>文件名</span><input id="fFileName" type="text" autocomplete="off"></label>
+
+          <div class="row row-wrap">
+            <button class="btn" id="btnShare" type="button">复制分享链接</button>
+            <button class="btn btn-quiet" id="btnCopyFenShort" type="button">复制 FEN</button>
+          </div>
+
+          <p class="hint">导出包含全部着法与对局信息；若起始局面不是标准开局，会自动写入 <code>SetUp</code> 与 <code>FEN</code> 标签。Half Chess 对局始终写入初始 FEN 与 <code>Variant</code> 标签。</p>
+        </section>
+
+        <!-- FEN -->
+        <section class="tab-panel" data-panel="fen">
+          <div class="block">
+            <div class="block-head">
+              <h2>当前局面 FEN</h2>
+              <button class="mini-btn" id="btnCopyFen" type="button">复制</button>
+            </div>
+            <textarea class="code-area" id="fenOut" rows="3" readonly spellcheck="false"></textarea>
+            <div class="row row-wrap">
+              <button class="btn btn-quiet" id="btnCopyStartFen" type="button">复制起始局面 FEN</button>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-head"><h2>载入 FEN</h2></div>
+            <textarea class="code-area" id="fenIn" rows="3" spellcheck="false"
+              placeholder="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"></textarea>
+            <div class="row row-wrap">
+              <button class="btn btn-primary" id="btnLoadFen" type="button">载入局面</button>
+              <button class="btn" id="btnLoadStartPos" type="button">标准开局</button>
+            </div>
+            <div class="notice" id="fenFeedback" hidden></div>
+          </div>
+
+          <div class="block">
+            <div class="block-head"><h2>局面解析</h2></div>
+            <dl class="fen-detail" id="fenDetail"></dl>
+          </div>
+        </section>
+
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <span>全部计算在本地完成，棋谱不会上传</span>
+    <span class="dot-sep">·</span>
+    <span><code>←</code> <code>→</code> 逐步复盘，<code>空格</code> 自动播放</span>
+    <span class="dot-sep">·</span>
+    <span>棋子图片位于 <code>img/</code></span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<div class="drag-veil" id="dragVeil" hidden><span>松开以导入棋谱</span></div>
+
+<script src="vendor/chess.js"></script>
+<script src="js/halfchess.js"></script>
+<script src="js/pgn.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
